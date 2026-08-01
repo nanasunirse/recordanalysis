@@ -1,4 +1,4 @@
-
+st.image('genelater_logo.png')
 
 # Generated from: Perfect_6.25.ipynb
 # Converted at: 2026-08-01T10:35:39.795Z
