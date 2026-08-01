@@ -5,7 +5,7 @@ import streamlit as st
 uploaded_file = st.file_uploader("upload your food log")
 
 if uploaded_file is not None:
-wb = load_workbook(
+  wb = load_workbook(
 uploaded_file,
 data_only=True,
 keep_vba=True
