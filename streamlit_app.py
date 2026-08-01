@@ -9,7 +9,11 @@ uploaded_file = st.file_uploader(
     type=["xlsx", "xlsm"]
 )
 
+import openpyxl
+import streamlit as st
 
+st.write("openpyxl installed!")
+st.write(openpyxl.__version__)
 
 import streamlit as st
 
