@@ -9,6 +9,19 @@ uploaded_file = st.file_uploader(
     type=["xlsx", "xlsm"]
 )
 
+
+
+import streamlit as st
+
+try:
+    import openpyxl
+    st.success("openpyxl installed")
+except Exception as e:
+    st.error(e)
+
+
+
+
 if uploaded_file is not None:
 
     df = pd.read_excel(
@@ -17,3 +30,5 @@ if uploaded_file is not None:
     )
 
     st.write(df.head(20))
+
+
