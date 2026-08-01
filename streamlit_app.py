@@ -1,5 +1,13 @@
-st.image('genelater_logo.png')
+import streamlit as st
+from pathlib import Path
 
+logo_path = Path("genelater_logo.png")
+
+if logo_path.exists():
+    st.image(str(logo_path), width=250)
+else:
+    st.warning("Logo file not found")
+    
 # Generated from: Perfect_6.25.ipynb
 # Converted at: 2026-08-01T10:35:39.795Z
 # Next step (optional): refactor into modules & generate tests with RunCell
