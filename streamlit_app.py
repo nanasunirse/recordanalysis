@@ -455,5 +455,71 @@ def run_batch(input_files=None, base_dir=None):
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
     return manifest
 
-if __name__ == '__main__':
-    run_batch()
+#if __name__ == '__main__':
+#    run_batch()
+
+# new input
+
+import streamlit as st
+import streamlit.components.v1 as components
+import tempfile
+from pathlib import Path
+
+st.set_page_config(
+    page_title="Nutrition Analysis Report",
+    layout="wide"
+)
+
+st.title("Nutrition Analysis Report Generator")
+st.write("Upload your food record Excel file, then the nutrition report will be generated automatically.")
+
+uploaded_file = st.file_uploader(
+    "Upload your Report Excel file",
+    type=["xlsm", "xlsx"]
+)
+
+if uploaded_file is not None:
+    st.success(f"Uploaded file: {uploaded_file.name}")
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
+
+        # Save uploaded Excel file temporarily
+        input_path = tmpdir / uploaded_file.name
+        input_path.write_bytes(uploaded_file.getbuffer())
+
+        try:
+            # Run your existing main function
+            manifest = run_batch(
+                input_files=[input_path],
+                base_dir=tmpdir
+            )
+
+            # Get output HTML file path
+            output_html_name = manifest[0]["output_html"]
+            output_html_path = tmpdir / output_html_name
+
+            html_text = output_html_path.read_text(encoding="utf-8")
+
+            st.subheader("Generated Nutrition Report")
+
+            # Show HTML report inside Streamlit
+            components.html(
+                html_text,
+                height=1200,
+                scrolling=True
+            )
+
+            # Download button
+            st.download_button(
+                label="Download HTML Report",
+                data=html_text,
+                file_name=output_html_name,
+                mime="text/html"
+            )
+
+        except Exception as e:
+            st.error("An error occurred while generating the report.")
+            st.exception(e)
+else:
+    st.info("Please upload an Excel file to start.")
