@@ -1,26 +1,6 @@
 # st.set_page_config(page_title="メインページ", page_icon='icon.png') #show icon
 # st.title("Multiple OSS Access Log Analyzer")
 
-import streamlit as st
-import pandas as pd
-
-uploaded_file = st.file_uploader(
-    "Upload your food log",
-    type=["xlsx", "xlsm"]
-)
-
-# check the contents in the excel file 
-if uploaded_file is not None:
-
-    df = pd.read_excel(
-        uploaded_file,
-        header=None
-    )
-
-    st.write(df.head(20))
-
-# main 
-
 # Generated from: Perfect_6.25.ipynb
 # Converted at: 2026-08-01T10:35:39.795Z
 # Next step (optional): refactor into modules & generate tests with RunCell
