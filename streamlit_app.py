@@ -1,5 +1,4 @@
-# st.set_page_config(page_title="メインページ", page_icon='icon.png') #show icon
-# st.title("Multiple OSS Access Log Analyzer")
+
 
 # Generated from: Perfect_6.25.ipynb
 # Converted at: 2026-08-01T10:35:39.795Z
